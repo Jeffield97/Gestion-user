@@ -4,6 +4,8 @@
 
 package com.mycompany.proyecto;
 
+import com.mycompany.proyecto.view.Login;
+
 /**
  *
  * @author jeffield
@@ -11,6 +13,7 @@ package com.mycompany.proyecto;
 public class Proyecto {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        Login login = new Login();
+                login.setVisible(true);
     }
 }
