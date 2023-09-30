@@ -15,9 +15,9 @@ import java.sql.SQLException;
 public class DBConnection {
 
     //Datos de la base de datos
-    private static final String URL = "jdbc:mysql://localhost:3306/tu_basededatos";
-    private static final String USUARIO = "tu_usuario";
-    private static final String CONTRASEÑA = "tu_contraseña";
+    private static final String URL = "jdbc:mysql://localhost:3306/historia_usuarios";
+    private static final String USUARIO = "root";
+    private static final String CONTRASEÑA = "password";
 
     // Método para establecer la conexión a la base de datos
     public static Connection obtenerConexion() {

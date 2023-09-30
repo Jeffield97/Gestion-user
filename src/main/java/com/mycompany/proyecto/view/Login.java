@@ -4,6 +4,9 @@
  */
 package com.mycompany.proyecto.view;
 
+import com.mycompany.proyecto.model.DBConnection;
+import java.sql.Connection;
+
 /**
  *
  * @author jeffield
@@ -16,6 +19,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         initComponents();
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,6 +53,11 @@ public class Login extends javax.swing.JFrame {
         getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, -1, -1));
 
         jButton1.setText("Ingresar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 340, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon("/home/jeffield/Downloads/proyectof/src/main/java/vista/hexa.jpg")); // NOI18N
@@ -57,6 +66,12 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Connection conexion = DBConnection.obtenerConexion();
+        DBConnection.cerrarConexion(conexion);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
