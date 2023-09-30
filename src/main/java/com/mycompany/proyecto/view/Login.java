@@ -6,6 +6,8 @@ package com.mycompany.proyecto.view;
 
 import com.mycompany.proyecto.model.DBConnection;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 /**
  *
@@ -20,7 +22,6 @@ public class Login extends javax.swing.JFrame {
         initComponents();
     }
 
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,8 +33,8 @@ public class Login extends javax.swing.JFrame {
 
         labelMetric1 = new org.edisoncor.gui.label.LabelMetric();
         labelMetric2 = new org.edisoncor.gui.label.LabelMetric();
-        textField1 = new org.edisoncor.gui.textField.TextField();
-        textField2 = new org.edisoncor.gui.textField.TextField();
+        txtUsuario = new org.edisoncor.gui.textField.TextField();
+        txtContrasena = new org.edisoncor.gui.textField.TextField();
         jCheckBox1 = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -46,10 +47,10 @@ public class Login extends javax.swing.JFrame {
 
         labelMetric2.setText("Contrase;a");
         getContentPane().add(labelMetric2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, -1, -1));
-        getContentPane().add(textField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 220, -1));
-        getContentPane().add(textField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 220, -1));
+        getContentPane().add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 150, 220, -1));
+        getContentPane().add(txtContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 200, 220, -1));
 
-        jCheckBox1.setText("jCheckBox1");
+        jCheckBox1.setText("Mostrar contrase;a");
         getContentPane().add(jCheckBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 280, -1, -1));
 
         jButton1.setText("Ingresar");
@@ -70,7 +71,30 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         Connection conexion = DBConnection.obtenerConexion();
+        try {
+            //Tomando valores de los TextField
+            String usuario = txtUsuario.getText();
+            String contrasena = txtContrasena.getText();
+            Statement statement = conexion.createStatement();
+            String consultaLogin = String.format("Select * from administrador where usuario= '%s'", usuario);
+            ResultSet resulado = statement.executeQuery(consultaLogin);
+            while(resulado.next()){
+                String password = resulado.getString("contrasena");
+                
+                //Compara si 
+                if (password.contains(contrasena)) {
+                    RegisterPerson registerPerson = new RegisterPerson();
+                    registerPerson.setVisible(true);
+                    System.out.println("Cambiando...");
+                    this.setVisible(false);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
         DBConnection.cerrarConexion(conexion);
+
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -114,7 +138,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private org.edisoncor.gui.label.LabelMetric labelMetric1;
     private org.edisoncor.gui.label.LabelMetric labelMetric2;
-    private org.edisoncor.gui.textField.TextField textField1;
-    private org.edisoncor.gui.textField.TextField textField2;
+    private org.edisoncor.gui.textField.TextField txtContrasena;
+    private org.edisoncor.gui.textField.TextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }

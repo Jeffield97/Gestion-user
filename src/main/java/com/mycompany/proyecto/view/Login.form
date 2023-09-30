@@ -45,14 +45,14 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.edisoncor.gui.textField.TextField" name="textField1">
+    <Component class="org.edisoncor.gui.textField.TextField" name="txtUsuario">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="370" y="150" width="220" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="org.edisoncor.gui.textField.TextField" name="textField2">
+    <Component class="org.edisoncor.gui.textField.TextField" name="txtContrasena">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="370" y="200" width="220" height="-1"/>
@@ -61,7 +61,7 @@
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBox1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="jCheckBox1"/>
+        <Property name="text" type="java.lang.String" value="Mostrar contrase;a"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
