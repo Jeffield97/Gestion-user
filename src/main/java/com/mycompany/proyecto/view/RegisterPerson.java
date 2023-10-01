@@ -8,6 +8,9 @@ import com.mycompany.proyecto.model.DBConnection;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -121,6 +124,11 @@ public class RegisterPerson extends javax.swing.JFrame {
         });
 
         BtnEliminar.setText("Eliminar");
+        BtnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEliminarActionPerformed(evt);
+            }
+        });
 
         BtnLimpiar.setText("Limpiar");
         BtnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -132,6 +140,11 @@ public class RegisterPerson extends javax.swing.JFrame {
         labelMetric2.setText("Nombre");
 
         btnAdicionar.setText("Adicionar");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
 
         labelMetric3.setText("Fecha de nacimiento");
 
@@ -221,6 +234,11 @@ public class RegisterPerson extends javax.swing.JFrame {
     txtNombre.setText("");
     }
     
+    private void showModal(String msg){
+        JFrame frame = new JFrame("Exitosa");
+        JOptionPane.showMessageDialog(frame, msg,"Operacion exitosa",JOptionPane.INFORMATION_MESSAGE);
+    }
+    
     private void BtnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnModificarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnModificarActionPerformed
@@ -251,6 +269,46 @@ public class RegisterPerson extends javax.swing.JFrame {
             System.out.println(e);
         }
     }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void BtnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEliminarActionPerformed
+        // TODO add your handling code here:
+        Connection conexion = DBConnection.obtenerConexion();
+        try {
+            cleanForm();
+            String id = txtId.getText();
+            Statement statement = conexion.createStatement();
+            String consultaEliminar=String.format("Delete from persona where ID=%s", id);
+            int resultado = statement.executeUpdate(consultaEliminar);
+            if(resultado==1)
+            {
+                showModal("Persona eliminada exitosamente");
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }//GEN-LAST:event_BtnEliminarActionPerformed
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        // TODO add your handling code here:
+        String id= txtId.getText();
+        String email=txtEmail.getText();
+        String nombre = txtNombre.getText();
+        Connection conexion = DBConnection.obtenerConexion();
+        try {
+            Statement statement = conexion.createStatement();
+            String consultaSave = String.format("Insert into persona (ID,nombre_completo,email) values ('%s','%s','%s')", id,nombre, email);
+            int resultado = statement.executeUpdate(consultaSave);
+            if(resultado==1)
+            {
+                showModal("Persona registrada exitosamente");
+            }
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+        
+    }//GEN-LAST:event_btnAdicionarActionPerformed
 
     /**
      * @param args the command line arguments
